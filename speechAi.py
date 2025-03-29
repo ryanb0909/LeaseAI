@@ -89,8 +89,3 @@ class AI_Assistant:
         )
 
         stream(audio_stream)
-
-greeting = "Hi Ryan, please ask me any question you like"
-ai_assistant = AI_Assistant()
-ai_assistant.generate_audio(greeting)
-ai_assistant.start_transcription()

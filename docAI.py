@@ -2,9 +2,10 @@ import streamlit as st
 import PyPDF2
 import base64
 from openai import OpenAI
+from speechAi import AI_Assistant
 
 #Set OpenAI API Key
-OpenAI.api_key = "API-KEY"
+OpenAI.api_key = "APIKEY"
 
 # Set page configuration
 st.set_page_config(page_title="AI-Powered Deal Making")
@@ -68,6 +69,20 @@ for message in st.session_state.messages:
 
 # User input for chat
 user_input = st.chat_input("Ask a question about the lease PDFs.")
+
+transcribed_input = None
+
+if st.button("🎤 Start Voice Prompt"):
+    assistant = AI_Assistant()
+    greeting = "Hi Ryan, please ask me any question you like"
+    assistant.generate_audio(greeting)
+
+   
+    # transcribed_input = assistant.start_transcription() uncomment this line once assembly is purchased
+
+    if transcribed_input:
+        st.success(f"Transcribed: {transcribed_input}")
+        user_input = transcribed_input 
 
 # Set up the language model
 client = OpenAI(api_key=OpenAI.api_key)
